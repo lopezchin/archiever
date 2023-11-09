@@ -114,7 +114,7 @@ h6 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 30%);
   color: #fff;
   line-height: 1;
   margin-right: 8px;
@@ -440,6 +440,21 @@ section .container {
   margin-bottom: 0;
 }
 
+.about-me a.button {
+  display: block;
+  margin: 15px 0;
+  background: #18d26e;
+  border: 0;
+  padding: 10px 30px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 4px;
+}
+
+.about-me a.button:hover {
+  background: #15bb62;
+}
+
 /*--------------------------------------------------------------
 # Counts
 --------------------------------------------------------------*/
@@ -469,7 +484,7 @@ section .container {
 }
 
 .counts .count-box span {
-  font-size: 36px;
+  font-size: 24px;
   display: block;
   font-weight: 600;
   color: #fff;
@@ -477,9 +492,14 @@ section .container {
 
 .counts .count-box p {
   padding: 0;
-  margin: 0;
+  margin: 0 0 15px;
   font-family: "Raleway", sans-serif;
-  font-size: 14px;
+  font-size: 17px;
+}
+
+.counts .count-box a{
+  color: #fff;
+  text-decoration: underline;
 }
 
 /*--------------------------------------------------------------
@@ -1014,7 +1034,7 @@ section .container {
   font-size: 24px;
   color: #18d26e;
   border-radius: 50%;
-  padding: 14px;
+  padding: 12px;
   float: left;
   background: rgba(255, 255, 255, 0.1);
 }
@@ -1134,6 +1154,7 @@ section .container {
   padding: 12px 15px;
 }
 
+
 .contact .php-email-form button[type=submit] {
   background: #18d26e;
   border: 0;
@@ -1144,6 +1165,21 @@ section .container {
 }
 
 .contact .php-email-form button[type=submit]:hover {
+  background: #15bb62;
+}
+
+.contact a.button {
+  display: block;
+  margin: 15px 0;
+  background: #18d26e;
+  border: 0;
+  padding: 10px 30px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 4px;
+}
+
+.contact a.button:hover {
   background: #15bb62;
 }
 

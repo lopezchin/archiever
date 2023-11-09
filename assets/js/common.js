@@ -46,7 +46,7 @@ function generateVCard() {
 
     // Create vCard content
     var vCardData = `BEGIN:VCARD
-                      VERSION:3.0
+                      VERSION:2.1
                       FN:`+fullname+`
                       TEL:`+phoneNumber+`
                       EMAIL:`+email+`

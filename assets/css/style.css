@@ -332,6 +332,10 @@ h6 {
   color: #0563bb;
 }
 
+#hero .social-links a i.bx{
+  font-size: 2rem!important;
+}
+
 @media (max-width: 992px) {
   #hero {
     text-align: center;
@@ -1038,6 +1042,12 @@ section {
   font-weight: 600;
   margin-bottom: 5px;
   color: #45505b;
+  font-family: "Open Sans", sans-serif!important;
+}
+
+.contact .info h4 a{
+  color: #45505b;
+  text-decoration: underline;
 }
 
 .contact .info p {
@@ -1047,11 +1057,15 @@ section {
   color: #728394;
 }
 
+.contact .info .personal{
+  margin-bottom: 40px;
+}
 .contact .info .email,
 .contact .info .phone {
   margin-top: 40px;
 }
 
+.contact .info .personal:hover i,
 .contact .info .email:hover i,
 .contact .info .address:hover i,
 .contact .info .phone:hover i {
@@ -1135,6 +1149,22 @@ section {
 }
 
 .contact .php-email-form button[type=submit]:hover {
+  background: #0678e3;
+}
+
+a.button{
+  display: block;
+  background: #0563bb;
+  border: 0;
+  margin: 20px 0;
+  padding: 10px 35px;
+  font-size: 20px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+a.button:hover{
   background: #0678e3;
 }
 

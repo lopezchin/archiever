@@ -17,8 +17,6 @@
         
         <h2>Incorrect Answers:</h2>
         <div id="incorrectAnswers"></div>
-        
-        <button onclick="window.location.href='index.html'">Try Again</button>
     </div>
 
     <script>
@@ -43,7 +41,10 @@
                     <ul>${optionsHTML}</ul>
                     <hr>
                 `;
+
             });
+
+            incorrectDiv.innerHTML += `<button onclick="window.location.href='index.html'">Try Again</button>`;
         }
 
         // Clear storage after displaying results

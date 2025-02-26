@@ -38,6 +38,10 @@ button {
     cursor: pointer;
 }
 
+button#submitButton{
+    margin-top: 50px;
+}
+
 @media(min-width: 320px) and (max-width: 600px){
 
     .container {

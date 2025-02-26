@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Exam</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Trad Brainstorming Exam</h1>
+        <div id="timer">Time Left: <span id="time">30:00</span></div>
+        <form id="quizForm" action="results.html">
+            <div id="questions"></div>
+            <button type="submit" id="submitButton">Submit</button>
+        </form>
+    </div>
+    
+    <script>
+        let questions = [
+        { question: "A fixed amount added to the premium of a premium given policy regardless of policy size is known as", options: ["A. policy fee", "B. policy reserve", "C. policy values", "D. extra premium"], answer: "A"},
+        { question: "To be able to calculate the required premiums for a given policy, the agent must know the applicant's", options: ["A. age", "B. choice of plan", "C. face amount desired", "D. all of the above"], answer: "D"},
+        { question: "To calculate premiums for the other modes of premium payment, the annual premium is", options: [ "A. divided by the desired number of premium payments", "B. divided by a conversion factor for the mode of payment desired", "C. multiplied by a conversion factor for the mode of payment desired", "D. multiplied by a constant conversion factor"], answer: "C"},
+        { question: "The convertible feature of a term insurance policy provides that the policy may be" , options: ["A. changed to a permanent insurance policy without evidence of insurability", "B. changed to another life", "C. cashed for a guaranteed sum", "D. changed to permanent insurance with evidence of insurability"], answer: "A"},
+        { question: "A man with moderate means can have maximum protection possible through", options: ["A. 20 yr. endowment", "B. Limited pay life", "C. Term insurance", "D. Whole life insurance"], answer: "C"},
+        { question: "Mr. Juan Valdez wants a policy which will entitle him to receive dividends yearly. What will you recommend to Mr. Valdez?", options: [ "A. participating plans", "B. non-participating plans", "C. term insurance", "D. none of the above"], answer: "A"} ,
+        { question: "Mrs. Rose Cortez owns a policy which does not provide for the build up of cash values and whose premiums remain level. Mrs. Cortez owns:", options: [ "A. ordinary life", "B. limited pay life", "C. decreasing term", "D. level term"], answer: "D"},
+        { question: "A term insurance which allows the policy owners to convert it to a permanent insurance within a specified period without evidence of insurability contains ________ feature:", options: [ "A. convertibility", "B. renewability", "C. dividend option", "D. both a & b"], answer: "A"},
+        { question: "An optional rider which can be attached to a policy stopping further premium payments in the event of disability is called" , options: ["A. policyholder protection clause", "B. accidental death and dismemberment", "C. waiver of premium", "D. total disability monthly income"], answer: "C"},
+        { question: "If a policy with the accidental death rider becomes paid-up,", options: ["A. the accidental death rider ceases", "B. the face amount of the policy is reduced", "C. premiums on the basic policy stop but the rider premium continues", "D. none of the above"], answer: "A"},
+        { question: "Mr. Pedro Cruz became paralyzed as a result of jumping out of the window in an attempt to commit suicide. Under the usual provisions of a disability income policy, he would be entitled to", options: [ "A. receive the total disability income benefit and the waiver of premiums", "B. receive partial disability benefits", "C. be granted the waiver of premiums", "D. receive neither disability income nor waiver of premiums"], answer: "D"},
+        { question: "If an insured is disabled and his life insurance policy is being continued in force through the waiver of premium, the dividends of the policy would", options: [ "A. cease", "B. continue at reduced rate", "C. continue as if the owner is paying the premium", "D. continue but they would be applied toward premium being waived"], answer: "C"},
+        { question: "A policy with a minor as the proposed insured is called", options: [ "A. rated policy", "B. juvenile policy", "C. regular policy", "D. substandard policy"], answer: "B"},
+        { question: "Life insurance policies for which higher than standard premium rates are payable are said to be" , options: [ "A. rated policies", "B. contingent policies", "C. non-participating policies", "D. conditional policies"], answer: "A"},
+        { question: "Which of the following factors would have the least effect on the premium charged for life insurance?", options: [ "A. age", "B. occupation", "C. income", "D. all of the above"], answer: "C"},
+        { question: "A risk is considered substandard based on any or all of the following criteria:", options: [ "A. death, occupation and moral character", "B. occupation, moral character and family health history", "C. income, educational attainment and occupation", "D. death, income and educational background"], answer: "B"} ,
+        { question: "Statements in the application forms are", options: [ "A. guarantees", "B. representation", "C. warranties", "D. none of the above"], answer: "B"},
+        { question: "Mr. Roel Reyes has been confined in a hospital 3 years prior to his application for insurance. He therefore needs to give the following information", options: [ "A. name of attending doctor, diagnosis, date of confinement", "B. the bill and medicines", "C. name of doctor only", "D. date of confinement only"], answer: "A"},
+        { question: "For life insurance coverage to be valid, insurable interest must exist" , options: ["A. only at the inception of the policy", "B. only at the time of the loan", "C. throughout the entire lifetime of the policy", "D. both at the time of the policy issue and at the time of the loan but not necessarily throughout the lifetime of the policy"], answer: "A"},
+        { question: "Under the law pertaining to life insurance", options: ["A. only minor children can be named irrevocable beneficiaries", "B. only the wife can be named irrevocable beneficiary", "C. only the wife and the children can be named irrevocable beneficiaries", "D. any person with insurable interest can be named irrevocable beneficiaries"], answer: "D"},
+        { question: "When the proceeds of a life insurance policy are left with the company to earn interest", options: [ "A. income tax is levied on the proceeds", "B. income tax is levied on the interest earnings of the proceeds", "C. estate tax is levied on the proceeds", "D. donor's tax is levied on the proceeds"], answer: "B"} ,
+        { question: "The common practice of most life insurers is that the life insurance goes into force", options: [ "A. when the application is received by the branch office", "B. when the policy is delivered to the applicant", "C. in accordance with the legal stipulation of the Insurance Code", "D. when the agent gives a bind receipt"], answer: "D"},
+        { question: "According to insurance law, a common-law spouse cannot be designated a beneficiary", options: [ "A. since there is no benefit of marriage in the relationship", "B. if his/her legal partner is still living and the previous marriage has not been legally dissolved", "C. since the common-law relationship is an immoral relationship", "D. all of the above"], answer: "B"},
+        { question: "Which one of the following provisions in a permanent life insurance policy may lapse for non- payment of premium?", options: [ "A. Guaranteed Insurability", "B. Automatic Premium Loan", "C. Settlement Options", "D. Reinstatement Provision"], answer: "B"},
+        { question: "A policyholder may obtain money from the insurance company and still remain insured by", options: [ "A. surrendering the policy for its cash value", "B. discontinuing payment of premium for some period", "C. taking a policy loan", "D. taking the extended insurance option"], answer: "C"},
+        { question: "When you bought an insurance policy on your wife's life, you were 27 and she was 26, but you stated that you were 26 and she was 2Five years later your wife dieD. The insurance company will pay", options: [ "A. the face amount", "B. the face amount adjusted for misstatement of age", "C. the sum of the premium paid", "D. slightly less than the face amount"], answer: "B"},
+        { question: "If the insured dies during the grace period of an unpaid life insurance policy, the amount payable to the beneficiary is usually the", options: [ "A. total premiums paid plus interest", "B. cash surrender value of the policy minus the unpaid premiums", "C. face amount of the policy minus the unpaid premiums", "D. full face amount"], answer: "C"},
+        { question: "An automatic premium loan differs from the other policy loans in that an automatic premium loan", options: [ "A. need not be repaid by the policyowner", "B. must be repaid during the policy year in which it is granted", "C. goes into effect requiring no separate action from the policyowner", "D. involves higher interest payments because of the greater cost of administration"], answer: "C"},
+        { question: "When a policy is assigned absolutely" , options: ["A. the assignee acquires all the rights and interests of the original policyholder", "B. the original policyholder still can exercise some of the rights", "C. the original beneficiary is not changed", "D. none of the above"], answer: "A"},
+        { question: "If a policy owner does not pay a premium on the due date, the policy will immediately", options: ["A. lapse", "B. be converted to a paid up policy for a lesser amount", "C. go into automatic premium loan", "D. continue in full force for a period of grace"], answer: "D"},
+        { question: "The three non-forfeiture values in a permanent policy are", options: [ "A. cash dividends, bonus additions and extended term insurance", "B. cash surrender value, loan value, assignment", "C. waiver of premium, reinstatement and the policy loan", "D. cash surrender value, paid value, extended term insurance"], answer: "D"} ,
+        { question: "Mr. Dela Cruz stated in his application that he was 30 years of age and a policy was issued to him on that basis. When he died twenty years later it was found that, in fact, he was 34 years of age at the time of his application. In conformity with the Insurance Code, the company ", options: [ "A. paid the amount of insurance payable to his beneficiary reduced in relation to his actual age at the time the contract was signed", "B. paid one half of the face value of the policy", "C. need not pay the face value of the policy, but refund all premiums paid", "D. paid the full face value of the policy without any extra charges"], answer: "A"},
+        { question: "An annuity plan" , options: ["A. offers life insurance protection", "B. offers the waiver of premium benefit", "C. is the same as an endowment plan", "D. is a purchase of income"], answer: "D"},
+        { question: "The person who purchases the annuity plan is called the", options: ["A. assignor", "B. owner", "C. insured", "D. annuitant"], answer: "D"},
+        { question: "With employer-employee groups, an employee does not fill out a personal application for insurance. Instead, he merely fills out" , options: [ "A. an enrollment card", "B. a registration card", "C. a certificate of insurance coverage", "D. a salary deduction form"], answer: "A"},
+        { question: "In the event an employee leaves the company in which he is a member of its group insurance policy, his group coverage can be changed to an individual policy using the", options: [ "A. policy exchange facility", "B. conversion privilege", "C. change of plan provision", "D. policy change form"], answer: "B"},
+        { question: "Policy reserves are future obligations on the part of" , options: ["A. the Insurance Commission", "B. the Insurance Company", "C. the beneficiary", "D. the policyowner"], answer: "B"},
+        { question: "Insurance companies which are owned by the policyowners are examples of", options: ["A. stock companies", "B. mutual companies", "C. family corporation", "D. open-end companies"], answer: "B"},
+        { question: "All of the following statements regarding a life insurance application are correct except,", options: [ "A. it must be signed by the applicant", "B. usually it will be made a part of the policy contract", "C. misstatements of material facts could void the policy during the contestable period", "D. statements made on the applications are warranties"], answer: "D"} ,
+        { question: "Which one of the following statements is correct?", options: [ "A. an insurance agent's license will be renewed when the commissioner is satisfied that the information in the application is accurate and all requirements are met", "B. an insurance agent's license is valid only for one month", "C. an insurance agent's license is valid during the lifetime of the agent", "D. an insurance agent's license will be renewed when the corresponding application and fee are received by the Insurance Commissioner"], answer: "A"},
+        { question: "Which one of the following statements is correct?", options: [ "A. an agent is allowed to share commissions when selling a whole life policy but not when selling a term policy", "B. an agent is allowed to share commissions with another licensed agent or agents but with no one else", "C. sharing the commission with any other person is called twisting", "D. an agent is not allowed to share commissions with any person"], answer: "B"},
+        { question: "Which one of the following statements is correct?", options: [ "A. rebating of premiums can only be authorized by the head office of the insurer", "B. a life insurance is not allowed to identify on his letterhead the name of the insurer he represents", "C. life insurance agents are allowed to act for two insurers at the same time under the same license", "D. rebating of premiums by an insurance agent is prohibited"], answer: "D"},
+        { question: "Persuading a policyowner, directly or indirectly, to surrender or lapse a policy in one company and replacing it with a policy in another company is", options: [ "A. rebating", "B. twisting", "C. knocking", "D. discounting"], answer: "B"},
+        { question: "Rebating is", options: [ "A. dating the policy a month in advance", "B. giving false information", "C. twisting", "D. premium discrimination against policyholders"], answer: "D"},
+        { question: "One example covered under the ethical practices and procedures is", options: [ "A. keep all policyholders information confidential", "B. always recommend a will", "C. never drink in front of a client", "D. always pick up the first premium with the application for insurance"], answer: "A"},
+        { question: "The term knocking means", options: [ "A. promising to pay to two annuitants a fixed annual income as long as both survive", "B. making derogatory remarks about competing underwriters or companies", "C. the number of years that persons at a given age will live on the average as shown by the mortality table", "D. none of the above"], answer: "B"},
+        { question: "Twisting is" , options: ["A. paying the premium on one policy by surrendering the dividends of another policy", "B. the replacement of a policy in one company with another policy in another company", "C. an attempt made by an insurance company to secure the services of an agent from another company", "D. an offense which does not apply to variable concepts"], answer: "B"},
+        { question: "The misstatement of facts by either of the parties of insurance to the other whether in writing or orally preliminary and in reference to making the insurance contract is", options: ["A. knocking", "B. overloading", "C. misrepresentation", "D. twisting"], answer: "C"},
+        { question: "Selling a person more insurance than what is warranted by his sources is called", options: [ "A. overloading", "B. twisting", "C. rebating", "D. knocking"], answer: "A"} ,
+        { question: "A single premium policy means a policy" , options: ["A. requiring only a single premium each year", "B. under which only one premium payment is required", "C. only available to single individuals", "D. on which no more than one premium can be paid in advance"], answer: "B"},
+        { question: "A father enters into a life insurance contract on behalf of his chilD. In this case, the father is the", options: [ "A. Insured", "B. Beneficiary", "C. Insurer", "D. applicant-owner"], answer: "D"} ,
+        { question: "When explaining dividends, the following information must be supplied" , options: ["A. that they are not guaranteed", "B. the dividends paid up in the previous years", "C. the anticipated dividends", "D. the relation to the cost of the policy"], answer: "A"},
+        { question: "An insurance plan which offers protection and saving is called", options: ["A. temporary plan", "B. permanent plan", "C. participating plan", "D. non-participating plan"], answer: "B"},
+        { question: "Which of the following can give the longest protection?", options: [ "A. 20-year endowment", "B. Endowment at 65", "C. Ordinary Life", "D. 20-year term"], answer: "C"} ,
+        { question: "Two attractive features of a term insurance are:", options: [ "A. convertibility and cash values", "B. cash values and dividends", "C. protection and dividends", "D. convertibility and renewability"], answer: "D"},
+        { question: "A term policy only offers", options: [ "A. cash values", "B. protection", "C. savings", "D. dividends"], answer: "B"},
+        { question: "A term rider is" , options: ["A. a term policy with a waiver of premium", "B. another name for a convertible term policy", "C. a renewable term policy", "D. a term insurance added to a permanent plan"], answer: "D"},
+        { question: "For the waiver of premium to be effective,", options: ["A. disability must be total", "B. disability must be permanent", "C. both a & b", "D. either a or b"], answer: "C"},
+        { question: "Disability benefits are not paid", options: [ "A. for self-inflicted injuries", "B. if there is a loan against the policy", "C. if all the policy dividends have been withdrawn", "D. if disability resulted from sickness only"], answer: "A"} ,
+        { question: "A person wanting a greater coverage for the least amount of premium has an option of attaching what rider in his permanent life policy?", options: [ "A. a waiver of premium", "B. term insurance rider", "C. guaranteed insurability rider", "D. accidental death rider"], answer: "B"},
+        { question: "One supplementary benefit offered is a payor's benefit which is intended to", options: [ "A. provide for the return of premiums to an adult payor in the event that a minor insured dies", "B. provide a waiver of premium benefit in the event of the death or disability of the person paying the premiums", "C. allow the insurance company to pay the policy's proceeds to the person who seems equitably entitled to the proceeds", "D. assure that the adult payor will retain a vested interest in the policy when the insured reaches the age of majority"], answer: "B"},
+        { question: "Since the purchase of life insurance is a voluntary choice, the individual must meet" , options: ["A. comprehensive inspection report", "B. certain standards of health and occupation", "C. minimum income requirement", "D. all of the above"], answer: "B"},
+        { question: "Anti-selection occurs", options: ["A. when an agent thinks only of his own interest and not of his policy owners", "B. when you purchase bad stocks with expectation that they will improve", "C. when the insurance company accepts more that as share of poor risks", "D. when person in poor health wish to buy insurance"], answer: "D"},
+        { question: "In insurance, risk means", options: [ "A. chances of you being paid by the company", "B. hazard on people's lives", "C. chances of the beneficiary being paid", "D. none of the above"], answer: "B"} ,
+        { question: "In an application, the information that must be disclosed include", options: [ "A. only his date and place of birth", "B. only his family history", "C. every fact in his knowledge that is material to the insurance", "D. only information he wants the agent to know"], answer: "C"},
+        { question: "A hazardous occupation could be defined", options: [ "A. an occupation the duties of which expose the insured to a degree of danger of sustaining injury", "B. an occupation in unhealthy working conditions exposing the insured to elements which can cause sickness", "C. an occupation which exposes the insured to social hazards", "D. all of the above"], answer: "D"},
+        { question: "For a contract to be legal and binding," , options: ["A. parties to the contract must be members of the bar", "B. parties to the contract must be legally competent", "C. parties to the contract must be above 21", "D. both at the time of the policy issue and at the time of the loan but not necessarily throughout the lifetime of the policy"], answer: "B"},
+        { question: "The insurance code specifies that a contract does not take effect unless", options: ["A. the policy is delivered to an insured, his assignee or agent, or to a beneficiary", "B. payment of the first premium is made to the insurer or its authorized agent", "C. no change has taken place in the insurability of the life to be insured between the time of the application was completed and the time the policy was delivered", "D. the insured has named in the policy no fewer than two beneficiaries"], answer: "B"},
+        { question: "All of the following would be practicable to become beneficiaries except", options: [ "A. children by former marriage", "B. brothers and sisters", "C. someone who owes you money", "D. someone to whom you owe money"], answer: "C"} ,
+        { question: "A person has insurable interest in the life of", options: [ "A. his child or grandchild", "B. any person upon whom he is wholly or in part dependent on, or from whom he is receiving support or education", "C. any person with whom he has pecuniary interest", "D. all of the above"], answer: "D"},
+        { question: "Anybody can be designated a beneficiary except", options: ["A. a creditor", "B. minor", "C. those expressly prohibited by law to receive donations", "D. all of the above"], answer: "C"},
+        { question: "The parties involved in a life insurance contract are the", options: [ "A. insurance company and agent", "B. insurance company and insured", "C. agent and insured", "D. insured and beneficiary"], answer: "B"},
+        { question: "Within two years of buying a life insurance policy, you are accidentally killed when your car hits a tree. In these circumstances, the insurance company will", options: [ "A. refund premiums because it is suicide", "B. pay double the face amount", "C. pay the face amount", "D. pay nothing"], answer: "C" },
+        { question: "If a policy did not contain the name of a beneficiary, the beneficiary will be", options: [ "A. the wife", "B. the children", "C. the insured's brother and sisters", "D. the insured's estate"], answer: "D" },
+        { question: "If a loan is taken on a participating policy, dividends for that policy while there is a loan against the policy will be", options: [ "A. suspended", "B. paid a reduced rate", "C. unaffected", "D. increased"], answer: "C" },
+        { question: "Interest is charged on policy loans", options: [ "A. for registered policies only", "B. if the loans is outstanding for more than a year, a loan repaid within a year is interest free", "C. to replace investment income the insurer cannot earn since a loan has been granted", "D. for participating policies only"], answer: "C" },
+        { question: "In the case of life insurance a sale is considered completed if the application is signed and payment of the first premium is made by the applicant. For the sale to be considered completed,", options: [ "A. a medical examination has to be made first", "B. Payment of the first premium has to be made by the applicant in full or in part, as specified. One of the acceptable methods of settlement is by cash or check in part, with a note for the balance", "C. Payment of the first premium has to be made in full by a note first", "D. The first premium has to be paid for in full and in cash"], answer: "A" },
+        { question: "Why is it important that the application is the basis of the policy?" , options: ["A. Because the completed application is the basis of the policy contract and the company may accept or reject an application based on the information given in the application", "B. For the agent to have available data of his prospect in connection with future sales", "C. To avoid the necessity of the insurer putting all relevant details in the contract", "D. None of the above"], answer: "A"},
+        { question: "The suicide clause is in effect for", options: ["A. The first 6 months", "B. The first year", "C. The first 2 years", "D. The first 18 months"], answer: "C"},
+        { question: "In the event that a policy elects the paid up insurance option", options: [ "A. The premiums stop and the policy continues for the full face amount until age 65", "B. The premium cease and protection continues with a reduced amount of coverage", "C. The insurance continues at a reduced amount and with a reduced premium", "D. The policy will automatically terminate"], answer: "B"} ,
+        { question: "What are the basic settlement options?", options: [ "A. Cash surrender value, automatic premium loan", "B. Fixed amount, fixed period, interest, fixed period and for life", "C. Double indemnity, total disability waiver of premium", "D. Policy loans, assignment, beneficiary designation"], answer: "B"},
+        { question: "Benefits payable under health insurance policies cover" , options: ["A. accidental death and dismemberment benefits", "B. expense reimbursement benefits", "C. disability income benefits", "D. all of the above"], answer: "D"},
+        { question: "A life insurance company earns income from two main sources" , options: ["A. premium income and investment income", "B. mortgage income and premium income", "C. dividend income and interest income", "D. mortgage income and dividend income"], answer: "A"},
+        { question: "Stock companies are owned by", options: ["A. policyowners", "B. stockholders", "C. creditors", "D. government"], answer: "B"},
+        { question: "Which of the following statements is correct?", options: [ "A. Advertising by life insurance agents is prohibited", "B. All information about a client or a prospective client has to be treated as confidential", "C. The agents should always recommend the amount and type of policy to a prospective client which would be profitable for the company", "D. When an age3nt advertises his services in the press, he is not allowed to state the name of his"], answer: "B"} ,
+        { question: "Prior to granting a license, the IC requires proof of", options: [ "A. a clean record of employment", "B. a reasonable educational background", "C. a prospective agent's character and reputation", "D. all of the above"], answer: "D"},
+        { question: "The IC has the power to adjudicate insurance claims against insurance companies for any single claim not exceeding", options: [ "A. P1,000,000", "B. P250,000", "C. P100,000", "D. P500,000"], answer: "C"},
+        { question: "The typical grace period provision in a life insurance policy obliges the life insurance company to", options: [ "A. establish a policy loan to cover any premium which the policyowner fails to pay by due date", "B.  keep the policy in force for the duration of any major disability suffered by the policyowner", "C. allow the policyowner a three-month extension beyond the due date to make the late premium payment without penalty", "D. None of the above"], answer: "D"},
+        { question: "If a policyowner whose wife is the irrevocable. beneficiary wishes to cash in his policy, he must", options: [ "A. tell his wife what he is going to do", "B. First take a loan on the policy", "C. have the check issued in the name of his wife", "D. have the wife's consent"], answer: "D"},
+        { question: "Choose the incorrect statement. The entire contract between the policyowner and the insurance company include", options: [ "A. the application and the policy", "B. any verbal statement made by the agent to the applicant", "C. any document attached to the policy when issued", "D. any subsequent written amendments to the contract"], answer: "B"},
+        { question: "An Individual at age 35 purchases a policy under which he will in 20 years receive the face amount of the policy himself, if he is still alive at that date. This policy is obviously a", options: [ "A. 20 Yr. Endowment", "B.  20 Pay Life", "C. 20 Yr. Term", "D.  None of the above"], answer: "A"},
+        { question: "In a 20 Life policy", options: [ "A. protection is until age 100, payment of premium is for 20 years", "B. protection is until age 100. payment of premiums until age 100", "C. protection is for 20 years, payment of premium is for 20 year", "D. protection is for 20 years, payment of premiums until age 100"], answer: "A"},
+        { question: " A participating plan entitles the policyowner to receive a return of excess premiums. Such is termed as:", options: [ "A. endowments", "B. dividends", "C. cash values", "D. cash surrender value"], answer: "B"},
+        { question: "The main difference between a term plan and a permanent plan is", options: [ "A. permanent plans provide both protection and savings while term plans offer protection only", "B. permanent plans provides savings and dividends while term plans provide savings only", "C. permanent plans can be converted and renewed while term plans cannot", "D. all of the above"], answer: "A"},
+        { question: "The savings element of permanent plans allows for the build up of", options: [ "A. dividends", "B. cash values", "C. maturity benefits", "D. death benefits"], answer: "B"},
+        { question: "Insurance Companies have various sources of information and the insured. These are", options: [ "A. application form", "B. medical information bureau", "C. inspection report", "D. all of the above"], answer: "D"},
+        { question: "In insurance risks are classified as", options: [ "A. unacceptable and acceptable", "B. regular and irregular", "C. standard, substandard and declined", "D. complete and incomplete"], answer: "C"},
+        { question: "Statement in the application forms are", options: [ "A. guarantees", "B. representation", "C. warranties", "D. none of the above"], answer: "B"},
+        { question: "Insurance companies have a source of confidential medical information on applicants for life insurance. This is the", options: [ "A. agents confidential report bureau", "B. inspection reports bureau", "C. financial standing bureau", "D. medical impairment bureau"], answer: "D"},
+        { question: "An agent is filling up the Agent's Confidential Report. What information must he put in his report?", options: [ "A. information about insured's standing in the community", "B. information about insured's finances", "C. all information he knows which are material to the application for insurance", "D. a & b only"], answer: "C"},
+        { question: "The insurance industry is under govemment regulations because", options: [ "A. it is required to account for money spent in company operations", "B. it pays high taxes", "C. it affects public interest", "D. it is a charitable institution"], answer: "C"},
+        { question: "An insurance agent's license can be revoked for", options: [ "A. fraudulent practices", "B. violation of any provision of the Insurance code", "C. misrepresentation in the application for license", "D. any or all of the above"], answer: "D"},
+        { question: "The following are unethical practices in the solicitation and procurement of insurance except", options: [ "A. misleading estimates of the dividends or shares of surplus to be received thereon", "B. inducing a policyholder to lapse, forfeil or surrender a policy he holds for another company", "C.  misrepresenting the tems of any policy issued by any insurance company or the benefits or advantages promised thereon.", "D. Obtaining or attempting to obtain a license by fraud or misrepresentation"], answer: "D"},
+        { question: "An agent is prohibited from doing all of the following except:", options: [ "A. alter an applicalion without the applicants prior written approval", "B. convince a prospective client to cancel his policy in one insurance company in order to buy a policy in the insurance company represented by the agent", "C. refund some of his commission to his client", "D. make complete comparisons of policies he sells and those offered by competing insurance companies"], answer: "D"},
+        { question: "Inducing an insured to lapse or forfeit his insurance", options: [ "A. is not allowed by the conditions of the contract", "B. is always to the advantage of the policyholder", "C. is an offense in the great majority of cases", "D. is matter left entirely to the discretion of the agent"], answer: "C"},
+        { question: "Whal are the basic settlement options?", options: [ "A. cash surrender value, automatic premium loan", "B. fixed amount, fixed period, interest, fixed period and for life", "C. double indemnity, total disability waiver of premium", "D. policy loans, assignment, beneficiary designation"], answer: "B"},
+        { question: "In case of misstatement of age", options: [ "A. the policy is cancelled and a new one is issued for the correct age", "B. the insured can be change", "C. the amount of insurance, is adjusted to the amount which the premium paid at the correct age would have purchased", "D. the policy remains in force and the company cannot contest it"], answer: "C"},
+        { question: "Which of the foliowing is a settlement option", options: [ "A. policy loan", "B. cash surrender value", "C. extended term insurance", "D. interest on insurance proceeds"], answer: "D"},
+        { question: "Name the provision in a permanent life insurance policy under which if the premium are discontinued full insurance coverage will be maintained for a specified period", options: [ "A. extended term insurance", "B. paid up insurance", "C. paid up additions", "D. life income option"], answer: "A"},
+        { question: "Which of the following is not derived from the non-forfeiture values", options: [ "A. cash surrender value", "B. paid up insurance", "C. dividends", "D. extended term insurance"], answer: "C"},
+        { question: "If a policyowner commits suicide within one year, what's the company's liability", options: [ "A. the company is not liable at all", "B. the company would be liable for the payment of the face value of the policy", "C. the company would be liable for the payment of the premiums paid by the insured only", "D. none of the above"], answer: "C"},
+        { question: "Which of the non-forfeiture option gives the largest amount of protection?", options: [ "A. fully paid insurance", "B. cash surrender value", "C. extended term insurance", "D. all of the above give equal protection"], answer: "C"},
+        { question: "Any policy which has lapsed can be reinstated subject to normal conditions of proof insurability within", options: [ "A. three years", "B. six months", "C. one year", "D. two year"], answer: "A"},
+        { question: "Life insurance is", options: [ "A. a luxury afforded by the rich", "B. only available to a specific group", "C. a cooperative risk-sharing plan", "D. a speculative risk"], answer: "C"},
+        { question: "The official who makes the necessary assumption and calculation in respect of the principal elements in life insurance premium in order to arrive at the premium rates to be charged is the", options: [ "A. life agent", "B. senior statistician", "C. Insurance Commissioner", "D. Actuary"], answer: "D"},
+        { question: "The fundamental advantage of the use of insurance as a means of meeting economic losses is that through insurance these losses are", options: [ "A. spread over a large number of people", "B. deferred for a specific period of time", "C. reduced for the group asa whole through the multiplier effect", "D. met as they arise through savings accumulated on an assessment basis"], answer: "A"},
+        { question: "The term loading means", options: [ "A. the difference between the gross and net premiums for the purpose of paying the insurance overhead expenses including commissions and taxes", "B. the amount which the company will lend to the policyholder with the policy as a security", "C. the amount payable in the event of the occurrence of a loss which renders him unfit for insurance", "D. none of the above"], answer: "A"},
+        { question: "Life insurance contributes directly to the welfare and progress of the country by", options: [ "A. accumulating capital for investment in commerce and industry", "B. partially relieving the community of the care of dependents", "C. encouraging provisions for the future", "D. all of the above"], answer: "D"},
+        { question: "Life insurance can provide money when income stops because of", options: [ "A. disability", "B. death", "C. retirement", "D. all of the above"], answer: "D"},
+        { question: "The three elements that make up a life insurance premium are", options: [ "A. Mortality experience, investment earnings and operating expenses", "B. cash values, dividends and paid up values", "C. cash values, loan values and paid up values", "D. past dividend experience, present dividend and projected interest"], answer: "A"},
+        { question: "The number of years that persons at a given age will live on the average as shown by the mortality table is called", options: [ "A. law of large numbers", "B. life income option", "C. life annuity", "D. life expectancy"], answer: "D"},
+        { question: "Part of the premium paid by a policyholder is invested by the insurance company. In premium computation, this factor is known as", options: [ "A. interest", "B. investment", "C. loading", "D. mortality"], answer: "A"}
+        ];
+
+        function getRandomQuestions(qList, num) {
+            let shuffled = qList.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, num);
+        }
+
+        let selectedQuestions = getRandomQuestions(questions, 50);
+        let questionsDiv = document.getElementById('questions');
+
+        selectedQuestions.forEach((q, index) => {
+            let questionHTML = `<p>${index + 1}. ${q.question}</p>`;
+            q.options.forEach(option => {
+                questionHTML += `<label><input type="radio" name="q${index}" value="${option[0]}"> ${option}</label><br>`;
+            });
+            questionsDiv.innerHTML += questionHTML;
+        });
+
+        // let timeLeft = 2700; // 45 minutes in seconds
+        // let timeLeft = 1800; // 30 minutes in seconds
+        // let timeLeft = 600; // 10 minutes in seconds
+        let timeLeft = 1200; // 20 minutes in seconds
+        // let timeLeft = 10; // 60 seconds
+        function updateTimer() {
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            document.getElementById('time').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateTimer, 1000);
+            } else {
+                document.getElementById("submitButton").click();
+            }
+        }
+        
+        updateTimer();
+
+        document.getElementById('quizForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let score = 0;
+            let formData = new FormData(event.target);
+            let results = [];
+
+            selectedQuestions.forEach((q, index) => {
+                let userAnswer = formData.get(`q${index}`);
+                let correctAnswer = q.answer;
+                if (userAnswer === correctAnswer) {
+                    score++;
+                } else {
+                    results.push({
+                        question: q.question,
+                        userAnswer: userAnswer || "No Answer",
+                        correctAnswer: correctAnswer,
+                        options: q.options
+                    });
+                }
+            });
+
+            localStorage.setItem('quizScore', score);
+            localStorage.setItem('quizResults', JSON.stringify(results));
+            window.location.href = 'results.html';
+        });
+    </script>
+</body>
+</html>

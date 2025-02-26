@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Quiz Results</h1>
+        <p id="score"></p>
+        <p>75% is the passing and score must be 35</p>
+
+        <h2>Incorrect Answers:</h2>
+        <div id="incorrectAnswers"></div>
+        <button onclick="window.location.href='index.html'">Try Again</button>
+    </div>
+
+    <script>
+        let score = localStorage.getItem('quizScore');
+        let results = JSON.parse(localStorage.getItem('quizResults')) || [];
+        let scorePercentage = (score / 50 ) * 100;
+
+        document.getElementById('score').textContent = `Your Score: ${score}/50 (${scorePercentage}%)`;
+
+        let incorrectDiv = document.getElementById('incorrectAnswers');
+        if (results.length === 0) {
+            incorrectDiv.innerHTML = "<p>Great job! You got all questions correct.</p>";
+        } else {
+            results.forEach(res => {
+                let optionsHTML = res.options.map(option => `<li>${option}</li>`).join("");
+
+                incorrectDiv.innerHTML += `
+                    <p><strong>Question:</strong> ${res.question}</p>
+                    <p><span style="color:red;">Your Answer:</span> ${res.userAnswer}</p>
+                    <p><span style="color:green;">Correct Answer:</span> ${res.correctAnswer}</p>
+                    <p><strong>Answer Choices:</strong></p>
+                    <ul>${optionsHTML}</ul>
+                    <hr>
+                `;
+            });
+        }
+
+        // Clear storage after displaying results
+        localStorage.removeItem('quizScore');
+        localStorage.removeItem('quizResults');
+    </script>
+</body>
+</html>

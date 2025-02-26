@@ -11,9 +11,13 @@
         <h1>Quiz Results</h1>
         <p id="score"></p>
         <p>75% is the passing and score must be 35</p>
+        <button onclick="window.location.href='index.html'">Try Again</button>
 
+        <hr/>
+        
         <h2>Incorrect Answers:</h2>
         <div id="incorrectAnswers"></div>
+        
         <button onclick="window.location.href='index.html'">Try Again</button>
     </div>
 
@@ -26,7 +30,7 @@
 
         let incorrectDiv = document.getElementById('incorrectAnswers');
         if (results.length === 0) {
-            incorrectDiv.innerHTML = "<p>Great job! You got all questions correct.</p>";
+            incorrectDiv.innerHTML = "<p>Well done! You answered all the questions correctly.</p>";
         } else {
             results.forEach(res => {
                 let optionsHTML = res.options.map(option => `<li>${option}</li>`).join("");

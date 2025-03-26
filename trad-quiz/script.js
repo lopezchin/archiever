@@ -139,8 +139,9 @@ selectedQuestions.forEach((q, index) => {
     questionsDiv.innerHTML += questionHTML;
 });
 
+let timeLeft = 7200; // 120 minutes in seconds
 // let timeLeft = 2700; // 45 minutes in seconds
-let timeLeft = 1800; // 30 minutes in seconds
+// let timeLeft = 1800; // 30 minutes in seconds
 // let timeLeft = 600; // 10 minutes in seconds
 // let timeLeft = 1200; // 20 minutes in seconds
 // let timeLeft = 10; // 60 seconds
